@@ -20,9 +20,14 @@ class Dropdown {
   }
 
   toggleContent() {
-    
     // Toggle the ".dropdown-hidden" class off and on
-    this.content.classList.toggle("dropdown-hidden");
+    if (this.content.classList.contains("slide-right")) {
+      this.content.classList.replace("slide-right", "slide-left");
+    } else if (this.content.classList.contains("slide-left")) {
+      this.content.classList.replace("slide-left", "slide-right");
+    } else {
+      this.content.classList.toggle("slide-right");
+    }
   }
 }
 
