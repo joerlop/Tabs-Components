@@ -1,3 +1,17 @@
+class Tabs {
+  constructor(element) {
+    this.element = element;
+    this.linkElements = this.element.querySelectorAll(".tabs-link"); 
+    this.linkElements.forEach(link => new TabLink(link));
+    this.linkSelected = this.element.querySelector(".tabs-link-selected");
+  }
+
+//  deselect() {
+//    this.linkSelected.deselect();
+//  }
+}
+
+//Strecth above
 
 class TabLink {
   constructor(element) {
@@ -8,12 +22,12 @@ class TabLink {
     // Get the custom data attribute on the Link
     // this.data;
     this.data = this.element.dataset.tab;
-    console.log(this.data);
+    // console.log(this.data);
 
     // Using the custom data attribute get the associated Item element
     // this.itemElement;
     this.itemElement = document.querySelector(`.tabs-item[data-tab="${this.data}"]`);
-    console.log(this.itemElement);
+    // console.log(this.itemElement);
 
     // Using the Item element, create a new instance of the TabItem class
     // this.tabItem;
@@ -22,8 +36,8 @@ class TabLink {
     // Add a click event listener on this instance, 
     // calling the select method on click
     // this.TabItem.addEventListener("click", () => this.select());
-    this.element.addEventListener("click", () => this.select());
-
+    this.element.addEventListener("click", () => {
+      this.select()});
   };
 
   select() {
@@ -35,14 +49,19 @@ class TabLink {
     // class from all of the links
     // Array.from(links).forEach();
     links.forEach(link => link.classList.remove("tabs-link-selected"));
-
+    // tabs.deselect();
     // Add a class named "tabs-link-selected" to this link
     // this.element;
     this.element.classList.toggle("tabs-link-selected");
-    
+
+    // tabs.linkSelected = this.element;
     // Call the select method on the item associated with this link
     this.TabItem.select();
   }
+
+  // deselect() {
+  //  this.element.classList.remove("tabs-link-selected");
+  // }
 }
 
 class TabItem {
@@ -64,6 +83,10 @@ class TabItem {
     //this.element;
     this.element.classList.toggle("tabs-item-selected");
   }
+
+  // deselect() {
+  //  this.element.classList.remove("tabs-item-selected");
+  // }
 }
 
 /* START HERE: 
@@ -79,5 +102,7 @@ return a new instance of TabLink and pass in each link as a parameter
 
 */
 
-links = document.querySelectorAll(".tabs-link");
-links.forEach(link => new TabLink(link));
+// links = document.querySelectorAll(".tabs-link");
+// links.forEach(link => new TabLink(link));
+
+const tabs = new Tabs(document.querySelector(".tabs"));
